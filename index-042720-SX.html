@@ -294,7 +294,6 @@
       var secondEl = document.getElementById("second"); //declare a global variable to remember second element
       var minuteEl = document.getElementById("minute"); ////declare a global variable to remember minute element
 
-
       //declare this function to display question and options
       function displayQuestion(i) {
           document.getElementById("number1").textContent = i + 1;
@@ -400,6 +399,32 @@
             document.getElementById("result-container").setAttribute("style", "display:block");
             //stop the timer if finish the quiz before time out.
             stopTimer();
+            
+            // set up the result page
+            document.getElementById("correctQty").textContent = cQty;
+            document.querySelector("#totalQty").textContent = quizObj.length;
+            document.querySelector("#score").textContent ="" + userScore;
+            var percent = Math.ceil((userScore / fullScore)*5);
+            switch (percent) {
+                case 0:
+                case 1:
+                document.querySelector("#comments").textContent = "Well, you have a loft of studying to do!";
+                break;
+                case 2:
+                document.querySelector("#comments").textContent = "You must study much harder!";
+                break;
+                case 3:
+                document.querySelector("#comments").textContent = "You must study harder!";
+                break;
+                case 4:
+                document.querySelector("#comments").textContent = "Almost! study a little more and take the test again!";
+                break;
+                case 5:
+                document.querySelector("#comments").textContent = "You can be proud of yourself!";
+                break;        
+            };
+
+
         };
       });
 
@@ -417,9 +442,7 @@
       });
 
       //set up the result page
-      document.getElementById("correctQty").textContent = cQty;
-      document.querySelector("#totalQty").textContent = quizObj.length;
-      document.querySelector("#score").textContent ="" + userScore;
+      
 
       var cmt = ""; //declare a global variable to store the comments on the result.
       // var percent; //declare a global variable to store the percentage of correct answer
@@ -429,26 +452,6 @@
       };
       //display different comments according to the percent
       //declare a global variable to store the percentage of correct answer
-
-      var percent = Math.ceil((userScore / fullScore)*5);
-      switch (percent) {
-        case 0:
-        case 1:
-        document.querySelector("#comments").textContent = "Well, you have a loft of studying to do!";
-        break;
-        case 2:
-        document.querySelector("#comments").textContent = "You must study much harder!";
-        break;
-        case 3:
-        document.querySelector("#comments").textContent = "You must study harder!";
-        break;
-        case 4:
-        document.querySelector("#comments").textContent = "Almost! study a little more and take the test again!";
-        break;
-        case 5:
-        document.querySelector("#comments").textContent = "You can be proud of yourself!";
-        break;        
-      };
 
       //Click the try again button to redo the quiz.
       document.getElementById("again").addEventListener("click", function() {
@@ -505,6 +508,12 @@
               name.appendChild(yourAnswerEl);
             };
           }; //end inside for loop
+          if(userAnswerArr[i] === "No answer") {
+            var noAnswerEl = document.createElement("p");
+            noAnswerEl.textContent = "You didn't answer this question";
+            reviewCon.appendChild(noAnswerEl);
+            noAnswerEl.setAttribute("class", "no-answer");
+          };
         }; //end outside for loop        
       }); //end the review click event function
 

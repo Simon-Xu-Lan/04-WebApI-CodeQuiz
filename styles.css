@@ -165,6 +165,23 @@ body {
 
 }
 
+.no-answer {
+  background-color: yellow;
+  color: red;
+  margin-top: 5px;
+  border: 1px solid red;
+  width: 100%;
+  display: block;
+  position: relative;
+  padding: 10px 10px 10px 20px;
+  margin-bottom: 1px;
+  cursor: pointer;
+  font-size: 18px;
+  user-select: none;
+  word-wrap: break-word;
+  text-align: left;
+  vertical-align: middle;
+}
 
 
 
